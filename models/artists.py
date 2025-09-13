@@ -17,24 +17,28 @@ class ArtistBase(BaseModel):
     bio: Optional[str] = Field(default=None, description="Description if applicable")
     model_config = {
         "json_schema_extra": {
-            "example": {
-                "id":"123-123",
-                "name": "The Weekend",
-                "real_name": "Abel Tesfaye",
-                "bio": "born February 16, 1990, in Toronto"
-            }
+            "example": [
+                {
+                    "id":"650e8400-e29b-41d4-a716-446655440000",
+                    "name": "The Weekend",
+                    "real_name": "Abel Tesfaye",
+                    "bio": "born February 16, 1990, in Toronto"
+                }
+            ]
         }
     }
 
 class ArtistCreate(ArtistBase):
     model_config = {
         "json_schema_extra": {
-            "example": {
-                "id":"123-123",
-                "name": "The Weekend",
-                "real_name": "Abel Tesfaye",
-                "bio": "born February 16, 1990, in Toronto"
-            }
+            "example": [
+                {
+                    "id":"650e8400-e29b-41d4-a716-446655440000",
+                    "name": "The Weekend",
+                    "real_name": "Abel Tesfaye",
+                    "bio": "born February 16, 1990, in Toronto"
+                }
+            ]
         }
     }
 
@@ -44,12 +48,14 @@ class ArtistUpdate(ArtistBase):
     bio: Optional[str] = Field(default=None, description="Description if applicable")
     model_config = {
         "json_schema_extra": {
-            "example": {
-                "id":"123-123",
-                "name": "The Weekend",
-                "real_name": "Abel Tesfaye",
-                "bio": "born February 16, 1990, in Toronto"
-            }
+            "example": [
+                {
+                    "id":"650e8400-e29b-41d4-a716-446655440000",
+                    "name": "The Weekend",
+                    "real_name": "Abel Tesfaye",
+                    "bio": "born February 16, 1990, in Toronto"
+                }
+            ]
         }
     }
 
@@ -66,11 +72,15 @@ class ArtistRead(ArtistBase):
     )
     model_config = {
         "json_schema_extra": {
-            "example": {
-                "id":"123-123",
-                "name": "The Weekend",
-                "real_name": "Abel Tesfaye",
-                "bio": "born February 16, 1990, in Toronto"
-            }
+            "example": [
+                {
+                    "id":"650e8400-e29b-41d4-a716-446655440000",
+                    "name": "The Weekend",
+                    "real_name": "Abel Tesfaye",
+                    "bio": "born February 16, 1990, in Toronto",
+                    "created_at": "2025-01-15T10:20:30Z",
+                    "updated_at": "2025-01-16T12:00:00Z",
+                }
+            ]
         }
     }

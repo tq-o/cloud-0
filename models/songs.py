@@ -20,7 +20,7 @@ class SongBase(BaseModel):
         json_schema_extra= {
             "example": [
                 {
-                    "id":"123-123",
+                    "id":"550e8400-e29b-41d4-a716-446655440000",
                     "name": "The Weekend",
                     "real_name": "Abel Tesfaye",
                     "bio": "born February 16, 1990, in Toronto"
@@ -32,20 +32,22 @@ class SongBase(BaseModel):
     published_date: str = Field(description="Time in ISO 8601 format (UTC)")
     model_config = {
         "json_schema_extra": {
-            "example": {
-                "uid":"123-123",
-                "name": "Save Your Tears",
-                "artists": [
-                    {
-                        "id":"123-123",
-                        "name": "The Weekend",
-                        "real_name": "Abel Tesfaye",
-                        "bio": "born February 16, 1990, in Toronto"
-                    }
-                ],
-                "length": "PT3M36S",
-                "created_at": "2025-09-11T22:45:00Z"
-            }
+            "example": [
+                {
+                    "uid":"550e8400-e29b-41d4-a716-446655440000",
+                    "name": "Save Your Tears",
+                    "artists": [
+                        {
+                            "id":"650e8400-e29b-41d4-a716-446655440000",
+                            "name": "The Weekend",
+                            "real_name": "Abel Tesfaye",
+                            "bio": "born February 16, 1990, in Toronto"
+                        }
+                    ],
+                    "length": "PT3M36S",
+                    "published_date": "2025-09-11T22:45:00Z"
+                }
+            ]
         }
     }
 
@@ -53,20 +55,22 @@ class SongCreate(SongBase):
     """Creation payload for a Song."""
     model_config = {
         "json_schema_extra": {
-            "example": {
-                "uid":"123-123",
-                "name": "Save Your Tears",
-                "artists": [
-                    {
-                        "id":"123-123",
-                        "name": "The Weekend",
-                        "real_name": "Abel Tesfaye",
-                        "bio": "born February 16, 1990, in Toronto"
-                    }
-                ],
-                "length": "PT3M36S",
-                "created_at": "2025-09-11T22:45:00Z"
-            }
+            "example": [
+                {
+                    "uid":"550e8400-e29b-41d4-a716-446655440000",
+                    "name": "Save Your Tears",
+                    "artists": [
+                        {
+                            "id":"650e8400-e29b-41d4-a716-446655440000",
+                            "name": "The Weekend",
+                            "real_name": "Abel Tesfaye",
+                            "bio": "born February 16, 1990, in Toronto"
+                        }
+                    ],
+                    "length": "PT3M36S",
+                    "published_date": "2025-09-11T22:45:00Z"
+                }
+            ]
         }
     }
 
@@ -78,7 +82,7 @@ class SongUpdate(SongBase):
         json_schema_extra= {
             "example": [
                 {
-                    "id":"123-123",
+                    "id":"650e8400-e29b-41d4-a716-446655440000",
                     "name": "The Weekend",
                     "real_name": "Abel Tesfaye",
                     "bio": "born February 16, 1990, in Toronto"
@@ -90,20 +94,22 @@ class SongUpdate(SongBase):
     published_date: Optional[str] = Field(description="Time in ISO 8601 format (UTC)")
     model_config = {
         "json_schema_extra": {
-            "example": {
-                "uid":"123-123",
-                "name": "Save Your Tears",
-                "artists": [
-                    {
-                        "id":"123-123",
-                        "name": "The Weekend",
-                        "real_name": "Abel Tesfaye",
-                        "bio": "born February 16, 1990, in Toronto"
-                    }
-                ],
-                "length": "PT3M36S",
-                "created_at": "2025-09-11T22:45:00Z"
-            }
+            "example": [
+                {
+                    "uid":"550e8400-e29b-41d4-a716-446655440000",
+                    "name": "Save Your Tears",
+                    "artists": [
+                        {
+                            "id":"650e8400-e29b-41d4-a716-446655440000",
+                            "name": "The Weekend",
+                            "real_name": "Abel Tesfaye",
+                            "bio": "born February 16, 1990, in Toronto"
+                        }
+                    ],
+                    "length": "PT3M36S",
+                    "published_date": "2025-09-11T22:45:00Z"
+                }
+            ]
         }
     }
 
@@ -125,19 +131,23 @@ class SongRead(SongBase):
     )
     model_config = {
         "json_schema_extra": {
-            "example": {
-                "uid":"123-123",
-                "name": "Save Your Tears",
-                "artists": [
-                    {
-                        "id":"123-123",
-                        "name": "The Weekend",
-                        "real_name": "Abel Tesfaye",
-                        "bio": "born February 16, 1990, in Toronto"
-                    }
-                ],
-                "length": "PT3M36S",
-                "created_at": "2025-09-11T22:45:00Z"
-            }
+            "example": [
+                {
+                    "uid":"550e8400-e29b-41d4-a716-446655440000",
+                    "name": "Save Your Tears",
+                    "artists": [
+                        {
+                            "id":"650e8400-e29b-41d4-a716-446655440000",
+                            "name": "The Weekend",
+                            "real_name": "Abel Tesfaye",
+                            "bio": "born February 16, 1990, in Toronto"
+                        }
+                    ],
+                    "length": "PT3M36S",
+                    "published_date": "2025-09-11T22:45:00Z",
+                    "created_at": "2025-01-15T10:20:30Z",
+                    "updated_at": "2025-01-16T12:00:00Z",
+                }
+            ]
         }
     }
