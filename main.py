@@ -15,6 +15,9 @@ from models.person import PersonCreate, PersonRead, PersonUpdate
 from models.address import AddressCreate, AddressRead, AddressUpdate
 from models.health import Health
 
+from models.songs import SongCreate, SongRead, SongUpdate
+from models.artists import ArtistCreate, ArtistRead, ArtistUpdate
+
 port = int(os.environ.get("FASTAPIPORT", 8000))
 
 # -----------------------------------------------------------------------------
@@ -22,6 +25,8 @@ port = int(os.environ.get("FASTAPIPORT", 8000))
 # -----------------------------------------------------------------------------
 persons: Dict[UUID, PersonRead] = {}
 addresses: Dict[UUID, AddressRead] = {}
+songs: Dict[UUID, SongRead] = {}
+artists: Dict[UUID, ArtistRead] = {}
 
 app = FastAPI(
     title="Person/Address API",
@@ -159,6 +164,101 @@ def update_person(person_id: UUID, update: PersonUpdate):
     persons[person_id] = PersonRead(**stored)
     return persons[person_id]
 
+# Extra endpoints
+# -----------------------------------------------------------------------------
+# Song endpoints
+# -----------------------------------------------------------------------------
+@app.post("/songs", response_model=SongRead, status_code=201)
+def create_song(song: SongCreate):
+    # Each song gets its own UUID; stored as SongRead
+    if song.id in songs:
+        raise HTTPException(status_code=400, detail="Song with this ID already exists")
+    song_read = SongRead(**song.model_dump())
+    songs[song_read.id] = song_read
+    return song_read
+
+@app.get("/songs", response_model= List[SongRead])
+def list_song(
+    id: Optional[str] = Query(None, description="Filter by id"),
+    name: Optional[str] = Query(None, description="Filter by name"),
+    artist_name: Optional[str] = Query(None, description="Filter by name of at least one artist")
+):
+    results = list(songs.values())
+
+    if id is not None:
+        results = [s for s in results if s.id == id]
+    if name is not None:
+        results = [s for s in results if s.name == name]
+    if artist_name is not None:
+        results = [s for s in results if any(a.name == artist_name for a in s.artists)]
+    return results
+
+@app.get("/songs/{song_id}", response_model=SongRead)
+def get_song(song_id: UUID):
+    if song_id not in songs:
+        raise HTTPException(status_code=404, detail="Song not found")
+    return songs[song_id]
+
+@app.patch("/songs/{song_id}", response_model=SongRead)
+def update_song(song_id: UUID, update: SongUpdate):
+    if song_id not in songs:
+        raise HTTPException(status_code=404, detail="Song not found")
+    stored = songs[song_id].model_dump()
+    stored.update(update.model_dump(exclude_unset=True))
+    songs[song_id] = SongRead(**stored)
+    return songs[song_id]
+
+@app.delete("/songs/{song_id}", response_model=dict)
+def delete_song(song_id: UUID):
+    if song_id not in songs:
+        raise HTTPException(status_code=404, detail="Song not found")
+    deleted_song = songs.pop(song_id)  # remove from dictionary
+    return {"detail": f"Song '{deleted_song.name}' was deleted successfully"}
+
+# -----------------------------------------------------------------------------
+# Artists endpoints
+# -----------------------------------------------------------------------------
+@app.post("/artists", response_model=ArtistRead, status_code=201)
+def create_artists(artist: ArtistCreate):
+    if artist.id in artists:
+        raise HTTPException(status_code=400, detail="Artist with this ID already exists")
+    artists[artist.id] = ArtistRead(**artist.model_dump())
+    return artists[artist.id]
+
+@app.get("/artists", response_model= List[ArtistRead])
+def list_artist(
+    id: Optional[str] = Query(None, description="Filter by id"),
+    name: Optional[str] = Query(None, description="Filter by name"),
+):
+    results = list(artists.values())
+    if id is not None:
+        results = [a for a in results if a.id == id]
+    if name is not None:
+        results = [a for a in results if a.name == name]
+    return results
+
+@app.get("/artists/{artist_id}", response_model=ArtistRead)
+def get_artist(artist_id: UUID):
+    if artist_id not in artists:
+        raise HTTPException(status_code=404, detail="Artist not found")
+    return artists[artist_id]
+
+@app.patch("/artist/{artist_id}", response_model=ArtistRead)
+def update_artist(artist_id: UUID, update: ArtistUpdate):
+    if artist_id not in artists:
+        raise HTTPException(status_code=404, detail="Artist not found")
+    stored = artists[artist_id].model_dump()
+    stored.update(update.model_dump(exclude_unset=True))
+    artists[artist_id] = ArtistRead(**stored)
+    return artists[artist_id]
+
+@app.delete("/artist/{artist_id}", response_model=dict)
+def delete_artist(artist_id: UUID):
+    if artist_id not in artists:
+        raise HTTPException(status_code=404, detail="Artist not found")
+    deleted_artist = artists.pop(artist_id)  # remove from dictionary
+    return {"detail": f"Artist '{deleted_artist.name}' was deleted successfully"}
+# -------------------------------------
 # -----------------------------------------------------------------------------
 # Root
 # -----------------------------------------------------------------------------
