@@ -17,7 +17,7 @@ class ArtistBase(BaseModel):
     bio: Optional[str] = Field(default=None, description="Description if applicable")
     model_config = {
         "json_schema_extra": {
-            "example": [
+            "examples": [
                 {
                     "id":"650e8400-e29b-41d4-a716-446655440000",
                     "name": "The Weekend",
@@ -31,7 +31,7 @@ class ArtistBase(BaseModel):
 class ArtistCreate(ArtistBase):
     model_config = {
         "json_schema_extra": {
-            "example": [
+            "examples": [
                 {
                     "id":"650e8400-e29b-41d4-a716-446655440000",
                     "name": "The Weekend",
@@ -48,7 +48,7 @@ class ArtistUpdate(ArtistBase):
     bio: Optional[str] = Field(default=None, description="Description if applicable")
     model_config = {
         "json_schema_extra": {
-            "example": [
+            "examples": [
                 {
                     "id":"650e8400-e29b-41d4-a716-446655440000",
                     "name": "The Weekend",
@@ -72,7 +72,7 @@ class ArtistRead(ArtistBase):
     )
     model_config = {
         "json_schema_extra": {
-            "example": [
+            "examples": [
                 {
                     "id":"650e8400-e29b-41d4-a716-446655440000",
                     "name": "The Weekend",

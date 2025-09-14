@@ -32,7 +32,7 @@ class SongBase(BaseModel):
     published_date: str = Field(description="Time in ISO 8601 format (UTC)")
     model_config = {
         "json_schema_extra": {
-            "example": [
+            "examples": [
                 {
                     "uid":"550e8400-e29b-41d4-a716-446655440000",
                     "name": "Save Your Tears",
@@ -55,7 +55,7 @@ class SongCreate(SongBase):
     """Creation payload for a Song."""
     model_config = {
         "json_schema_extra": {
-            "example": [
+            "examples": [
                 {
                     "uid":"550e8400-e29b-41d4-a716-446655440000",
                     "name": "Save Your Tears",
@@ -94,7 +94,7 @@ class SongUpdate(SongBase):
     published_date: Optional[str] = Field(description="Time in ISO 8601 format (UTC)")
     model_config = {
         "json_schema_extra": {
-            "example": [
+            "examples": [
                 {
                     "uid":"550e8400-e29b-41d4-a716-446655440000",
                     "name": "Save Your Tears",
@@ -131,7 +131,7 @@ class SongRead(SongBase):
     )
     model_config = {
         "json_schema_extra": {
-            "example": [
+            "examples": [
                 {
                     "uid":"550e8400-e29b-41d4-a716-446655440000",
                     "name": "Save Your Tears",
